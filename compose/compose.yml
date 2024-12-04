@@ -1,4 +1,14 @@
 services:
+    mysql:
+        image: mysql:8.0.40-debian
+        stdin_open: true
+        tty: true
+        ports:
+            - 80:8081
+        volumes:
+          - ./db_storage:/etc/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_secrets
     apache-wsgi:
         # Usemos la imagen que construimos para crear este contenedor. Si cambiaste el nombre y/o tag de la imagen recuerda
         # también cambiar la imagen, si no, Docker intentará descargar una imagen que no existe.
@@ -42,3 +52,7 @@ services:
             - ./apache-confs:/etc/httpd/conf.d/custom
             # Montura de los logs de Apache
             - ./logs:/etc/httpd/logs
+
+secrets:
+  db_secrets:
+    file: ./secrets/db_secrets.txt
