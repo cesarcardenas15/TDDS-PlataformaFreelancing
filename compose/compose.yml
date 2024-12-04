@@ -9,10 +9,10 @@ services:
           - ./db_storage:/etc/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_secrets
-    apache-wsgi:
+    nginx-gunicorn:
         # Usemos la imagen que construimos para crear este contenedor. Si cambiaste el nombre y/o tag de la imagen recuerda
         # también cambiar la imagen, si no, Docker intentará descargar una imagen que no existe.
-        image: usuario-local/apache-wsgi-almalinux:9.4-python3-12
+        image: localhost/almalinux_nginx_gunicorn:9.5-python3.12
         stdin_open: true
         tty: true
         # Exponer puertos del contenedor en puertos del equipo host, para hacer que los puertos solo sean accesibles dentro
@@ -21,10 +21,7 @@ services:
         #
         # [PUERTO_EXPUESTO_EN_EL_HOST]:[PUERTO_DEL_SERVICIO_CORRIENDO_DENTRO_DEL_CONTENEDOR]
         ports:
-            # Puerto por defecto de http, es por donde Apache escucha por defecto, nuestro Front End estará escuchando
-            #solicitudes desde aqui.
-            - 3000:80
-            # Puerto por defecto en el que escucha Django al correr su servidor durante el desarrollo, dejado por defecto
+            # Puerto por defecto en el que escucha Gunicorn al correr su servidor durante el desarrollo, dejado por defecto
             # como conveniencia.
             # Si tu Front End hace solicitudes a nivel de cliente querrás tener este puerto expuesto y que tu Front End
             # apunte a este puerto.
@@ -49,9 +46,9 @@ services:
             # Montura del Front End React.
             - ./frontend:/var/www/html
             # Montura de la carpeta conteniendo archivos de configuración de Apache.
-            - ./apache-confs:/etc/httpd/conf.d/custom
-            # Montura de los logs de Apache
-            - ./logs:/etc/httpd/logs
+            - ./nginx-confs:/etc/nginx/conf.d/
+            # Montura de los logs de Nginx
+            - ./logs:/var/log/nginx/logs
 
 secrets:
   db_secrets:
