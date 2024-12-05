@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function JobCard({ title, budget, description, skills, postedTime }) {
   return (
@@ -24,9 +25,11 @@ function JobCard({ title, budget, description, skills, postedTime }) {
           <p className="text-sm text-gray-500">{postedTime}</p>
         </div>
       </div>
-      <button className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors">
-        Aplicar Ahora
-      </button>
+      <Link to="/en-construccion">
+        <button className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+          Aplicar Ahora
+        </button>
+      </Link>
     </div>
   );
 }
