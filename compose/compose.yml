@@ -4,51 +4,39 @@ services:
         stdin_open: true
         tty: true
         ports:
-            - 80:8081
+            - 8085:80
         volumes:
           - ./db_storage:/etc/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_secrets
-    nginx-gunicorn:
-        # Usemos la imagen que construimos para crear este contenedor. Si cambiaste el nombre y/o tag de la imagen recuerda
-        # también cambiar la imagen, si no, Docker intentará descargar una imagen que no existe.
-        image: localhost/almalinux_nginx_gunicorn:9.5-python3.12
-        stdin_open: true
-        tty: true
-        # Exponer puertos del contenedor en puertos del equipo host, para hacer que los puertos solo sean accesibles dentro
-        # del equipo, añada la dirección localhost a estos así: 127.0.0.1:[PUERTO] , de otra manera, y si tu cortafuegos lo
-        # permite, otros dentro de tu red podrán acceder a estos servicios. Por defecto esto es así.
-        #
-        # [PUERTO_EXPUESTO_EN_EL_HOST]:[PUERTO_DEL_SERVICIO_CORRIENDO_DENTRO_DEL_CONTENEDOR]
-        ports:
-            # Puerto por defecto en el que escucha Gunicorn al correr su servidor durante el desarrollo, dejado por defecto
-            # como conveniencia.
-            # Si tu Front End hace solicitudes a nivel de cliente querrás tener este puerto expuesto y que tu Front End
-            # apunte a este puerto.
-            - 8000:8000
-        # Carpeta o archivos a montar dentro del contenedor.
-        #
-        # Es posible que si usas un sistema Linux con SELinux habilitado (Por ejemplo, sistemas basados en RHEL)te encuentres
-        # con problemas de permisos al intentar montar carpetas. Puede anidar ":z" al final de la declaración de una montura
-        # para indicar a Docker que etiquete tu carpeta/archivo de manera correspondiente y  SELinux permita su uso. Si esto
-        # no funciona puedes intentar usar "Volumenes", que son creados con los permisos correspondientes de SELinux, para
-        # más información, vea la documentación de Docker:
-        #       https://docs.docker.com/reference/cli/docker/volume/
-        #       https://docs.docker.com/engine/storage/volumes/
-        # Una solución más extrema es usar el modo permisivo de SELinux, para instrucciones, vea la documentación de Red Hat:
-        # https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/using_selinux/changing-selinux-states-and-
-        # modes_using-selinux#changing-to-permissive-mode_changing-selinux-states-and-modes
-        #
-        # - [CARPETA_O_ARCHIVO_A_MONTAR_DESDE_EL_HOST]:[UBICACION_DE_CARPETA_O_ARCHIVO_DENTO_DEL_CONTENEDOR]
+    django-gunicorn:
+        #image: localhost/plat_free_gunicorn:9.5-python3.13.1
         volumes:
-            # Montura de Django.
-            - ./backend:/django/backend
-            # Montura del Front End React.
-            - ./frontend:/var/www/html
-            # Montura de la carpeta conteniendo archivos de configuración de Apache.
-            - ./nginx-confs:/etc/nginx/conf.d/
-            # Montura de los logs de Nginx
-            - ./logs:/var/log/nginx/logs
+            - static:/backend/static
+            - sqllite_db:/ecommerce_project/db
+            - django_logs:/logs
+        build:
+            context: .
+        expose:
+            - 8000
+        restart: always
+    nginx:
+        build: ./nginx
+        volumes:
+            - static:/static #this is to make sure /static requests are routed to the shared volumne on host machine where django static files are stored
+            - nginx_logs:/var/log/nginx
+            - ./frontend:/frontend
+        ports:
+            - 8081:80
+            - 8000:8000
+        depends_on:
+            - django-gunicorn
+        restart: always
+volumes:
+  static:
+  sqllite_db:
+  django_logs:
+  nginx_logs:
 
 secrets:
   db_secrets:
