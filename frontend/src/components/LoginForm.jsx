@@ -1,13 +1,45 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(''); // Keeping this for potential future use
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Implement login logic
-    console.log('Login attempt with:', { email, password });
+    setError('');
+
+    try {
+      const response = await axios.get(`http://localhost:8000/api/usuarios`, {
+        params: { email }, // Passing the email as a query parameter
+      });
+
+      const users = response.data;
+
+      // Check if a user with the given email exists
+      const user = users.find((user) => user.email === email);
+
+      if (user) {
+        // Handle successful email verification
+        console.log('Usuario encontrado:', user);
+        
+        // Store user info in localStorage if needed
+        localStorage.setItem('user', JSON.stringify(user));
+
+        // Redirect to home or dashboard
+        navigate('/');
+      } else {
+        // Handle case where user does not exist
+        setError('El correo electrónico no está registrado.');
+      }
+    } catch (err) {
+      // Handle error in the request
+      setError('Error al verificar el correo electrónico. Inténtalo de nuevo más tarde.');
+      console.error('Error:', err.response ? err.response.data : err.message);
+    }
   };
 
   return (
@@ -16,6 +48,13 @@ const LoginForm = () => {
         <h2 className="text-2xl font-bold text-[#5046E5] text-center mb-6">
           Iniciar Sesión
         </h2>
+        
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            {error}
+          </div>
+        )}
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label 
@@ -38,51 +77,6 @@ const LoginForm = () => {
           </div>
           
           <div>
-            <label 
-              htmlFor="password" 
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Contraseña
-            </label>
-            <input 
-              type="password" 
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
-                         focus:outline-none focus:ring-2 focus:ring-[#5046E5] focus:border-[#5046E5] 
-                         transition duration-200"
-              placeholder="Ingresa tu contraseña"
-            />
-          </div>
-          
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input 
-                type="checkbox" 
-                id="remember" 
-                className="h-4 w-4 text-[#5046E5] focus:ring-[#5046E5] border-gray-300 rounded"
-              />
-              <label 
-                htmlFor="remember" 
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Recordarme
-              </label>
-            </div>
-            
-            <div className="text-sm">
-              <a 
-                href="#" 
-                className="font-medium text-[#5046E5] hover:text-opacity-80 transition duration-200"
-              >
-                ¿Olvidaste tu contraseña?
-              </a>
-            </div>
-          </div>
-          
-          <div>
             <button 
               type="submit" 
               className="w-full flex justify-center py-2 px-4 
@@ -92,20 +86,8 @@ const LoginForm = () => {
                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5046E5] 
                          transition duration-200"
             >
-              Iniciar Sesión
+              Verificar
             </button>
-          </div>
-          
-          <div className="text-center mt-4">
-            <p className="text-sm text-gray-600">
-              ¿No tienes una cuenta?{' '}
-              <a 
-                href="#" 
-                className="font-medium text-[#5046E5] hover:text-opacity-80 transition duration-200"
-              >
-                Regístrate
-              </a>
-            </p>
           </div>
         </form>
       </div>

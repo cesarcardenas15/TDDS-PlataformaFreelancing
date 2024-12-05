@@ -25,12 +25,19 @@ function Navbar() {
             <button className="p-2 text-gray-600 hover:text-indigo-600">
               <Bell size={20} />
             </button>
-            <Link to="/login">
-              <button className="flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
-                <User size={20} />
-                <span>Iniciar Sesión</span>
-              </button>
-            </Link>
+            <div className="flex items-center space-x-2">
+              <Link to="/login">
+                <button className="flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                  <User size={20} />
+                  <span>Iniciar Sesión</span>
+                </button>
+              </Link>
+              <Link to="/signup">
+                <button className="flex items-center space-x-2 border border-indigo-600 text-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-50">
+                  <span>Registrarse</span>
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

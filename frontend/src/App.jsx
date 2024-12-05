@@ -6,7 +6,7 @@ import PopularCategories from './components/PopularCategories';
 import FeaturedJobs from './components/FeaturedJobs';
 import Footer from './components/Footer';
 import LoginForm from './components/LoginForm';
-import HomePage from './pages/HomePage';
+import SignUpForm from './components/SignUpForm';
 
 function App() {
   return (
@@ -14,8 +14,15 @@ function App() {
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={
+            <>
+              <Hero />
+              <PopularCategories />
+              <FeaturedJobs />
+            </>
+          } />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignUpForm />} />
         </Routes>
         <Footer />
       </div>
