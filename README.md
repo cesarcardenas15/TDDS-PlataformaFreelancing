@@ -1,5 +1,6 @@
-**Plataforma de Freelancing**
+# Plataforma de Freelancing
 
-***Dependencias Entoro Virtual***
+## Indice
 
-pip install django djangorestframework
+* [Instrucciones de Django](django/README.md)
+* [Instrucciones de Docker Compose](compose/README.md)
