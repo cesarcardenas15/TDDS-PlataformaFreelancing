@@ -2,7 +2,7 @@ from django.db import models
 
 class Usuarios(models.Model):
     nombre_usuario = models.CharField(max_length=150)
-    email = models.CharField(max_length=255)
+    email = models.CharField(max_length=255, unique=True)
     password_hash = models.CharField(max_length=255)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 

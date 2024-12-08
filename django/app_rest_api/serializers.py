@@ -6,7 +6,7 @@ class UsuariosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuarios
         fields = '__all__'
-        extra_kwargs = {'password_hash': {'write_only': True}}
+        # extra_kwargs = {'password_hash': {'write_only': True}}
 
 # Serializer for Perfiles
 class PerfilesSerializer(serializers.ModelSerializer):
