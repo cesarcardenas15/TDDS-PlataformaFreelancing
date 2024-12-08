@@ -8,33 +8,36 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-indigo-600">SkillSphere</h1>
+            <h1 className="text-2xl font-bold text-indigo-600">FreelanceHub</h1>
             <div className="hidden md:block ml-10">
               <div className="flex items-center space-x-4">
-                <Link to="/en-construccion" className="text-gray-700 hover:text-indigo-600 transition duration-300 ease-in-out inline-block">Encontrar Trabajo</Link>
-                <Link to="/en-construccion" className="text-gray-700 hover:text-indigo-600 transition duration-300 ease-in-out inline-block">Explorar Freelancers</Link>
-                <Link to="/en-construccion" className="text-gray-700 hover:text-indigo-600 transition duration-300 ease-in-out inline-block">Cómo Funciona</Link>
+                <Link to="/jobs" className="text-gray-700 hover:text-indigo-600">Encontrar Trabajo</Link>
+                <Link to="/freelancers" className="text-gray-700 hover:text-indigo-600">Explorar Freelancers</Link>
+                <Link to="/how-it-works" className="text-gray-700 hover:text-indigo-600">Cómo Funciona</Link>
               </div>
             </div>
           </div>
-
+          
           <div className="flex items-center space-x-4">
-          <Link to="/en-construccion">
-              <button className="p-2 text-gray-600 hover:text-indigo-600">
-                <Search size={20} />
-              </button>
-            </Link>
-            <Link to="/en-construccion">
-              <button className="p-2 text-gray-600 hover:text-indigo-600">
-                <Bell size={20} />
-              </button>
-            </Link>
-            <Link to="/login">
-              <button className="flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out inline-block">
-                <User size={20} />
-                <span>Iniciar Sesión</span>
-              </button>
-            </Link>
+            <button className="p-2 text-gray-600 hover:text-indigo-600">
+              <Search size={20} />
+            </button>
+            <button className="p-2 text-gray-600 hover:text-indigo-600">
+              <Bell size={20} />
+            </button>
+            <div className="flex items-center space-x-2">
+              <Link to="/login">
+                <button className="flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                  <User size={20} />
+                  <span>Iniciar Sesión</span>
+                </button>
+              </Link>
+              <Link to="/signup">
+                <button className="flex items-center space-x-2 border border-indigo-600 text-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-50">
+                  <span>Registrarse</span>
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

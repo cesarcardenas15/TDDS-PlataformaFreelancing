@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState(''); // Keeping this for potential future use
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -13,31 +13,38 @@ const LoginForm = () => {
     setError('');
 
     try {
-      const response = await axios.get(`http://localhost:8000/api/usuarios`, {
-        params: { email }, // Passing the email as a query parameter
+      // Fetch users from the API
+      const response = await axios.get('http://localhost:8000/api/usuarios', {
+        params: { email }, // Optional: filter by email if backend supports it
       });
 
       const users = response.data;
 
-      // Check if a user with the given email exists
+      // Find user with matching email
       const user = users.find((user) => user.email === email);
 
       if (user) {
-        // Handle successful email verification
-        console.log('Usuario encontrado:', user);
-        
-        // Store user info in localStorage if needed
-        localStorage.setItem('user', JSON.stringify(user));
+        // Check if password_hash matches the entered password
+        if (user.password_hash === password) {
+          // Successful login
+          console.log('Usuario autenticado:', user);
+          
+          // Store user info in localStorage 
+          localStorage.setItem('user', JSON.stringify(user));
 
-        // Redirect to home or dashboard
-        navigate('/');
+          // Redirect to services page
+          navigate('/servicios');
+        } else {
+          // Incorrect password
+          setError('Contraseña incorrecta.');
+        }
       } else {
-        // Handle case where user does not exist
+        // User not found
         setError('El correo electrónico no está registrado.');
       }
     } catch (err) {
-      // Handle error in the request
-      setError('Error al verificar el correo electrónico. Inténtalo de nuevo más tarde.');
+      // Handle network or server errors
+      setError('Error al iniciar sesión. Inténtalo de nuevo más tarde.');
       console.error('Error:', err.response ? err.response.data : err.message);
     }
   };
@@ -77,6 +84,26 @@ const LoginForm = () => {
           </div>
           
           <div>
+            <label 
+              htmlFor="password" 
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Contraseña
+            </label>
+            <input 
+              type="password" 
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
+                         focus:outline-none focus:ring-2 focus:ring-[#5046E5] focus:border-[#5046E5] 
+                         transition duration-200"
+              placeholder="Ingresa tu contraseña"
+            />
+          </div>
+          
+          <div>
             <button 
               type="submit" 
               className="w-full flex justify-center py-2 px-4 
@@ -86,7 +113,7 @@ const LoginForm = () => {
                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5046E5] 
                          transition duration-200"
             >
-              Verificar
+              Iniciar Sesión
             </button>
           </div>
         </form>
