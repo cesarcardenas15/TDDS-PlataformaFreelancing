@@ -24,7 +24,7 @@ function JobCard({ title, budget, description, skills, postedTime }) {
           <p className="text-sm text-gray-500">{postedTime}</p>
         </div>
       </div>
-      <button className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+      <button className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors transition duration-300 ease-in-out inline-block">
         Aplicar Ahora
       </button>
     </div>
