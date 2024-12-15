@@ -1,14 +1,6 @@
 from django.db import models
 
-class Usuarios(models.Model):
-    nombre_usuario = models.CharField(max_length=150)
-    email = models.CharField(max_length=255, unique=True)
-    password_hash = models.CharField(max_length=255)
-    fecha_registro = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.nombre_usuario
-
+from app_auth.models import Usuario
 
 class Perfiles(models.Model):
     class Roles(models.TextChoices):
@@ -20,7 +12,7 @@ class Perfiles(models.Model):
     nombre = models.CharField(max_length=255)
     telefono = models.CharField(max_length=15)
     biografia = models.TextField(blank=True, null=True)
-    id_usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='perfiles')
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='perfiles')
 
     def __str__(self):
         return f"{self.nombre} ({self.get_rol_display()})"
