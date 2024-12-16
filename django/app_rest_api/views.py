@@ -1,15 +1,6 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import *
 from .serializers import *
-# Usuarios Views
-class UsuariosListCreateView(ListCreateAPIView):
-    queryset = Usuarios.objects.all()
-    serializer_class = UsuariosSerializer
-
-
-class UsuariosRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    queryset = Usuarios.objects.all()
-    serializer_class = UsuariosSerializer
 
 
 # Perfiles Views

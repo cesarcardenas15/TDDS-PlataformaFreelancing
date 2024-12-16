@@ -1,0 +1,10 @@
+db.sqlite
+
+app_rest_api/migrations/*
+!app_rest_api/migrations/__init__.py
+
+app_auth/migrations/*
+!app_auth/migrations/__init__.py
+
+
+
