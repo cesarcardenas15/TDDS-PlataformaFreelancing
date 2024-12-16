@@ -1,16 +1,11 @@
 from rest_framework import serializers
-from .models import Usuarios, Perfiles, Servicios, Ordenes, Disputa, Reviews
+from .models import Perfiles, Servicios, Ordenes, Disputa, Reviews
+from app_auth.models import Usuario
 
-# Serializer for Usuarios
-class UsuariosSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Usuarios
-        fields = '__all__'
-        # extra_kwargs = {'password_hash': {'write_only': True}}
 
 # Serializer for Perfiles
 class PerfilesSerializer(serializers.ModelSerializer):
-    id_usuario = serializers.PrimaryKeyRelatedField(queryset=Usuarios.objects.all())
+    id_usuario = serializers.PrimaryKeyRelatedField(queryset=Usuario.objects.all())
 
     class Meta:
         model = Perfiles
