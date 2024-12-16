@@ -14,7 +14,6 @@ Crea un ambiente virtual
 python -m venv env
 ```
 
-
 Entra en el ambiente virtual
 
 ```
@@ -29,6 +28,12 @@ source ./env/bin/activate.fish
 ```
 
 Para configurar en VSCode, vea [estas instrucciones](#vscode-venv-setup).
+
+Actualizar `pip`
+
+```
+pip install --upgrade pip
+```
 
 Instala las dependencias de Python del proyecto
 

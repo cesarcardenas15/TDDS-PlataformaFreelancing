@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import ServicesMenuPage from './pages/ServicesMenuPage'
+import ConstructionPage from './components/ConstructionPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/servicios" element={<ServicesMenuPage />} />
+          <Route path="/en-construccion" element={<ConstructionPage />} />
         </Routes>
         <Footer />
       </div>

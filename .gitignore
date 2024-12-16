@@ -1,2 +1,6 @@
-./db.sqlite3
-.DS_Store
+django/db.sqlite3
+**/.DS_Store
+compose/backend/*
+compose/frontend/*
+compose/secrets/db_secrets.txt
+__pycache__/
