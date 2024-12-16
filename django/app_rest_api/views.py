@@ -6,19 +6,19 @@ from .serializers import *
 
 # Perfiles Views
 class PerfilesListCreateView(ListCreateAPIView):
-    # Autenticacon por JWT
-    permission_classes = [IsAuthenticated]
-
     queryset = Perfiles.objects.all()
     serializer_class = PerfilesSerializer
+
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
 
 
 class PerfilesRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    # Autenticacon por JWT
-    permission_classes = [IsAuthenticated]
-
     queryset = Perfiles.objects.all()
     serializer_class = PerfilesSerializer
+
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
 
 
 # Servicios Views
@@ -34,36 +34,36 @@ class ServiciosRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
 
 # Ordenes Views
 class OrdenesListCreateView(ListCreateAPIView):
-    # Autenticacon por JWT
-    permission_classes = [IsAuthenticated]
-
     queryset = Ordenes.objects.all()
     serializer_class = OrdenesSerializer
+
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
 
 
 class OrdenesRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    # Autenticacon por JWT
-    permission_classes = [IsAuthenticated]
-
     queryset = Ordenes.objects.all()
     serializer_class = OrdenesSerializer
+
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
 
 
 # Disputa Views
 class DisputaListCreateView(ListCreateAPIView):
-    # Autenticacon por JWT
-    permission_classes = [IsAuthenticated]
-
     queryset = Disputa.objects.all()
     serializer_class = DisputaSerializer
+
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
 
 
 class DisputaRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    # Autenticacon por JWT
-    permission_classes = [IsAuthenticated]
-
     queryset = Disputa.objects.all()
     serializer_class = DisputaSerializer
+
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
 
 
 # Reviews Views
