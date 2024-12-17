@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
@@ -13,38 +14,34 @@ const LoginForm = () => {
     setError('');
 
     try {
-      // Fetch users from the API
-      const response = await axios.get('http://localhost:8000/api/usuarios', {
-        params: { email }, // Optional: filter by email if backend supports it
+      // Send login request to the new backend
+      const response = await axios.post('http://localhost:8000/auth/login', {
+        email,
+        password,
       });
 
-      const users = response.data;
+      // Extract tokens from response
+      const { access, refresh } = response.data;
 
-      // Find user with matching email
-      const user = users.find((user) => user.email === email);
+      // Decode the access token to get user data
+      const decodedToken = jwtDecode(access);
 
-      if (user) {
-        // Check if password_hash matches the entered password
-        if (user.password_hash === password) {
-          // Successful login
-          console.log('Usuario autenticado:', user);
-          
-          // Store user info in localStorage 
-          localStorage.setItem('user', JSON.stringify(user));
+      // Store tokens and user data in localStorage
+      localStorage.setItem('access_token', access);
+      localStorage.setItem('refresh_token', refresh);
+      localStorage.setItem('user', JSON.stringify(decodedToken));
 
-          // Redirect to services page
-          navigate('/servicios');
-        } else {
-          // Incorrect password
-          setError('Contraseña incorrecta.');
-        }
-      } else {
-        // User not found
-        setError('El correo electrónico no está registrado.');
-      }
+      console.log('Usuario autenticado:', decodedToken);
+
+      // Redirect to main page
+      navigate('/servicios');
     } catch (err) {
-      // Handle network or server errors
-      setError('Error al iniciar sesión. Inténtalo de nuevo más tarde.');
+      // Handle errors
+      if (err.response) {
+        setError(err.response.data.message || 'Error al iniciar sesión');
+      } else {
+        setError('Error inesperado al iniciar sesión');
+      }
       console.error('Error:', err.response ? err.response.data : err.message);
     }
   };
