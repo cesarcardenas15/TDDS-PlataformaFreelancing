@@ -1,4 +1,5 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 from .models import *
 from .serializers import *
 
@@ -8,10 +9,16 @@ class PerfilesListCreateView(ListCreateAPIView):
     queryset = Perfiles.objects.all()
     serializer_class = PerfilesSerializer
 
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
+
 
 class PerfilesRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Perfiles.objects.all()
     serializer_class = PerfilesSerializer
+
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
 
 
 # Servicios Views
@@ -30,10 +37,16 @@ class OrdenesListCreateView(ListCreateAPIView):
     queryset = Ordenes.objects.all()
     serializer_class = OrdenesSerializer
 
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
+
 
 class OrdenesRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Ordenes.objects.all()
     serializer_class = OrdenesSerializer
+
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
 
 
 # Disputa Views
@@ -41,10 +54,16 @@ class DisputaListCreateView(ListCreateAPIView):
     queryset = Disputa.objects.all()
     serializer_class = DisputaSerializer
 
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
+
 
 class DisputaRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Disputa.objects.all()
     serializer_class = DisputaSerializer
+
+    # Autenticacion por JWT
+    permission_classes = [IsAuthenticated]
 
 
 # Reviews Views
