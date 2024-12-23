@@ -9,6 +9,7 @@ import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import ServicesMenuPage from './pages/ServicesMenuPage'
 import ConstructionPage from './components/ConstructionPage';
+import CreateServiceForm from './components/CreateServiceForm';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/servicios" element={<ServicesMenuPage />} />
           <Route path="/en-construccion" element={<ConstructionPage />} />
+          <Route path="/crear-servicio" element={<CreateServiceForm />} />
         </Routes>
         <Footer />
       </div>
