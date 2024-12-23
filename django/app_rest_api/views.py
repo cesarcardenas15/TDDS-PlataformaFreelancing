@@ -10,7 +10,7 @@ class PerfilesListCreateView(ListCreateAPIView):
     serializer_class = PerfilesSerializer
 
     # Autenticacion por JWT
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class PerfilesRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
@@ -18,7 +18,7 @@ class PerfilesRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     serializer_class = PerfilesSerializer
 
     # Autenticacion por JWT
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 # Servicios Views
