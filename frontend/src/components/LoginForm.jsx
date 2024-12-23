@@ -32,7 +32,7 @@ const LoginForm = () => {
       localStorage.setItem('user', JSON.stringify(decodedToken));
 
       console.log('Usuario autenticado:', decodedToken);
-
+      window.dispatchEvent(new Event('storage'));
       // Redirect to main page
       navigate('/servicios');
     } catch (err) {
