@@ -11,6 +11,9 @@ COPY ./backend /backend
 # set working directory
 WORKDIR /backend
 
+RUN python ./manage.py makemigrations
+RUN python ./manage.py migrate
+
 # entrypoint shell scripts to be executed
 COPY ./entrypoint.sh /
 ENTRYPOINT ["sh", "/entrypoint.sh"]

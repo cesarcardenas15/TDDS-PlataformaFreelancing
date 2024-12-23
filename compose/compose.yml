@@ -10,7 +10,6 @@ services:
         environment:
             - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_secrets
     django-gunicorn:
-        #image: localhost/plat_free_gunicorn:9.5-python3.13.1
         volumes:
             - static:/backend/static
             - sqllite_db:/ecommerce_project/db
@@ -23,7 +22,7 @@ services:
     nginx:
         build: ./nginx
         volumes:
-            - static:/static #this is to make sure /static requests are routed to the shared volumne on host machine where django static files are stored
+            - static:/static 
             - nginx_logs:/var/log/nginx
             - ./frontend:/frontend
         ports:
