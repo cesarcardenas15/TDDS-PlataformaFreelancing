@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   return (
@@ -12,12 +13,17 @@ function Hero() {
             Conecta con freelancers talentosos y completa tus proyectos
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-white/70 transition duration-300 ease-in-out inline-block">
-              Contratar Freelancer
-            </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition duration-300 ease-in-out inline-block">
-              Convertirse en Freelancer
-            </button>
+            <Link to="/login">
+              <button className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-white/70 transition duration-300 ease-in-out inline-block">
+                Contratar Freelancer
+              </button>
+            </Link>
+            <Link to="/login">
+              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition duration-300 ease-in-out inline-block">
+                Convertirse en Freelancer
+              </button>
+            </Link>
+
           </div>
         </div>
       </div>
