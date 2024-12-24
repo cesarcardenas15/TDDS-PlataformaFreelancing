@@ -1,6 +1,7 @@
 import FreelancerProfile from '../components/FreelancerProfile';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 const PerfilFreelancer = () => {
   // Aquí deberías obtener los datos del perfil de tu API
@@ -10,7 +11,7 @@ const PerfilFreelancer = () => {
     const fetchProfileData = async () => {
       try {
         // Llamada a tu API
-        const response = await fetch('http://localhost:8000/api/perfiles');
+        const response = await axios.post('http://localhost:8000/api/perfiles');
         const data = await response.json();
         setProfileData(data);
       } catch (error) {

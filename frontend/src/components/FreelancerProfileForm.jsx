@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
-const FreelancerProfileForm = ({ user }) => {  // Recibimos el user como prop
+const FreelancerProfileForm = ({ user }) => {  // Recibimos el user_id como prop
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    role: 'freelancer',
+    rol: 'freelancer',
     nombre: '',
     telefono: '',
     biografia: '',
-    id_usuario: user  // Se asigna internamente
+    id_usuario: JSON.parse(user).user_id // Se asigna internamente
   });
-
+  console.log(JSON.parse(user).user_id);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
