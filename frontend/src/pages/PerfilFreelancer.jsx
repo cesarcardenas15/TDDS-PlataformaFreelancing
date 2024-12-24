@@ -1,4 +1,6 @@
 import FreelancerProfile from '../components/FreelancerProfile';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const PerfilFreelancer = () => {
   // Aquí deberías obtener los datos del perfil de tu API
