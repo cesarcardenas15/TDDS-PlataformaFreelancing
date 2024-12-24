@@ -10,6 +10,8 @@ import SignUpForm from './components/SignUpForm';
 import ServicesMenuPage from './pages/ServicesMenuPage'
 import ConstructionPage from './components/ConstructionPage';
 import CreateServiceForm from './components/CreateServiceForm';
+import CrearPerfil from './pages/CrearPerfil';
+import PerfilFreelancer from './pages/PerfilFreelancer';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
           <Route path="/servicios" element={<ServicesMenuPage />} />
           <Route path="/en-construccion" element={<ConstructionPage />} />
           <Route path="/crear-servicio" element={<CreateServiceForm />} />
+          <Route path="/crear-perfil" element={<CrearPerfil />} />
+          <Route path="/profile" element={<PerfilFreelancer />} />
         </Routes>
         <Footer />
       </div>

@@ -16,7 +16,7 @@ const DropDownProfile = () => {
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
           localStorage.removeItem('user');
-    
+
           console.log('Sesion Cerrada');
           window.dispatchEvent(new Event('storage'));
           // Redirect to main page
@@ -31,7 +31,7 @@ const DropDownProfile = () => {
                 <Link to="/profile">
                     <li>Perfil</li>
                 </Link>
-                <Link to="/become-freelance">
+                <Link to="/crear-perfil">
                     <li className="text-green-600 font-bold">Convertirse en Freelancer</li>
                 </Link>
                 <Link to="/" onClick={LogOut}>
