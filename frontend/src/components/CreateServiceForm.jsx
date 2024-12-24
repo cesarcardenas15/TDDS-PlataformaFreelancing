@@ -21,7 +21,7 @@ const CreateServiceForm = () => {
       const user = JSON.parse(userString);
       setFormData(prev => ({
         ...prev,
-        freelancer: user.id // Asumiendo que el usuario tiene un campo id
+        freelancer: (user).user_id // Asumiendo que el usuario tiene un campo id
       }));
     } else {
       // Si no hay usuario autenticado, redirigir al login
@@ -49,7 +49,7 @@ const CreateServiceForm = () => {
     setError('');
 
     try {
-      const token = localStorage.getItem('accessToken');
+      const token = localStorage.getItem('access_token');
 
       const config = {
         headers: {
