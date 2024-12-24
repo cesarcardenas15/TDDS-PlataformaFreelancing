@@ -1,5 +1,7 @@
 # Plataforma de Freelancing Skillsphere
 
+<img src="docs/res/skillsphere-capture-1.png" alt="drawing" width="500"/>
+
 Una plataforma que ofrece servicios de Freelancing y la posibilidad de publicar servicios para aquellos que busquen trabajo como Freelancers.
 
 ## Stack
@@ -15,6 +17,7 @@ Una plataforma que ofrece servicios de Freelancing y la posibilidad de publicar 
   * Docker Compose
 
 ## Despliegue
+
 * [Despliegue con Docker Compose](compose/README.md)
 
 ## Desarrollo
