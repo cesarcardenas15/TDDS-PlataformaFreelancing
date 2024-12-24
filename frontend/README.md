@@ -1,8 +1,39 @@
-# React + Vite
+# Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tecnologías
 
-Currently, two official plugins are available:
+* Node.js
+* React
+* Vite
+* Tailwind CSS Framework
+* axios
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Inicialización
+
+Instala las dependencias del proyecto.
+
+```
+npm i
+```
+
+Ejecuta el Front-End en entorno de desarrollo.
+
+```
+npm run dev
+```
+
+Crea una versión de producción.
+
+```
+npm run build
+```
+
+La versión de producción se hallará en la carpeta `dist`.
+
+## Testing
+
+Para hacer uso del testing con `playwright` es necesario instalar los navegadores de prueba, realiza la instalación con el siguiente comando.
+
+```
+npx playwright install
+```
