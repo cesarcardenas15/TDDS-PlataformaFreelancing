@@ -1,14 +1,14 @@
 services:
-    mysql:
-        image: mysql:8.0.40-debian
-        stdin_open: true
-        tty: true
-        ports:
-            - 8085:80
-        volumes:
-          - ./db_storage:/etc/lib/mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_secrets
+    # mysql:
+    #     image: mysql:8.0.40-debian
+    #     stdin_open: true
+    #     tty: true
+    #     ports:
+    #         - 8085:80
+    #     volumes:
+    #       - ./db_storage:/etc/lib/mysql
+    #     environment:
+    #         - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_secrets
     django-gunicorn:
         #image: localhost/plat_free_gunicorn:9.5-python3.13.1
         volumes:
@@ -16,7 +16,8 @@ services:
             - sqllite_db:/ecommerce_project/db
             - django_logs:/logs
         build:
-            context: .
+            dockerfile: ./compose/Dockerfile
+            context: ../
         expose:
             - 8000
         restart: always
@@ -27,7 +28,7 @@ services:
             - nginx_logs:/var/log/nginx
             - ./frontend:/frontend
         ports:
-            - 8081:80
+            - 8080:80
             - 8000:8000
         depends_on:
             - django-gunicorn
